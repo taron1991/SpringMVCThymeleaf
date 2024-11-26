@@ -8,7 +8,7 @@
 <h1>update a User:</h1>
 <form th:action="@{/api/addUser}" th:object="${user}" method="POST">
 
-    <!-- Add hidden form field to handle update -->
+
     Id to be changed:
     <input type="number" th:field="*{id}" />
     Name:
@@ -18,7 +18,7 @@
     <button type="submit" class="btn btn-info col-2"> Update a User</button>
 </form>
 <br/>
-<!-- Check if errorMessage is not null and not empty -->
+
 <div th:if="${errorMessage}" th:utext="${errorMessage}" style="color:red;font-style:italic;">
     ...
 </div>
