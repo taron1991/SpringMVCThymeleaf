@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>user deletion</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>user deletion:</h1>
+<form th:action="@{/api/del}" th:object="${userIdForm}" method="POST">
+    <label for="id">insert id of a user:</label>
+    <input type="number" th:field="*{id}" id="id" required />
+    <input type="submit" value="delete" />
+</form>
+<br/>
+<!-- Проверка на наличие сообщения об ошибке -->
+<div th:if="${errorMessage}" th:utext="${errorMessage}" style="color:red;font-style:italic;">
+    ...
+</div>
+</body>
+</html>
