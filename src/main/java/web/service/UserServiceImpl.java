@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-public class ServiceUserImpl implements ServiceUser{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;

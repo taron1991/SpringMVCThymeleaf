@@ -3,29 +3,28 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-import web.model.User;
-import web.service.ServiceUser;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import web.model.User;
+import web.service.UserService;
 
 @Controller
 @RequestMapping("/api")
 public class UserController {
 
-	private ServiceUser serviceUser;
+	private UserService userService;
 
 	@Autowired
-	public UserController(ServiceUser serviceUser) {
-		this.serviceUser = serviceUser;
+	public UserController(UserService userService) {
+		this.userService = userService;
 	}
 
 	@GetMapping("/users")
 	public String getAllUsers(Model model) {
-		model.addAttribute("userList", serviceUser.userList());
+		model.addAttribute("userList", userService.userList());
 		return "userList";
 	}
 
@@ -37,8 +36,8 @@ public class UserController {
 
 	@PostMapping("/addUser")
 	public String addUser(@ModelAttribute User user, Model model) {
-		serviceUser.addUser(user);
-		model.addAttribute("userList", serviceUser.userList());
+		userService.addUser(user);
+		model.addAttribute("userList", userService.userList());
 		return "redirect:/api/users";
 	}
 
@@ -57,7 +56,7 @@ public class UserController {
 
 	@PostMapping("/del")
 	public String delete(@ModelAttribute User userIdForm) {
-		serviceUser.delById(userIdForm.getId());
+		userService.delById(userIdForm.getId());
 		return "redirect:/api/users";
 	}
 
